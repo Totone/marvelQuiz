@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import Loader from '../Loader';
 
-import {FirebaseContext} from '../Firebase';
+import { FirebaseContext } from '../Firebase';
 
 import Logout from '../Logout';
 import Quiz from '../Quiz';

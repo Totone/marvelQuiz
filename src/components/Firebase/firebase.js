@@ -1,28 +1,22 @@
-import app from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import app from 'firebase/app'; // get Firebase
+import 'firebase/auth'; // enables Firebase authentication feature
+import 'firebase/firestore'; // enables Firebase db service
+import config from '../../assets/config/firebase'; // get stored config
 
-const config = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID
-};
-
-/**
- * Firebase sert d'API pour accéder au backend
- */
+/** Configures Firebase service to be handled in app */
 class Firebase {
+  /**
+   * Initializes Firebase with project config
+   * & assignes authentication & database
+   * services to auth & db class properties
+   */
   constructor() {
-    app.initializeApp(config);    // initialize Firebase with project config
+    app.initializeApp(config);
     this.auth = app.auth();
     this.db = app.firestore();
   }
 
-  // API for log in/out, signup & reset password
+  /** API requests methods declared to access service */
   signupUser = (email, pswd) => this.auth.createUserWithEmailAndPassword(email, pswd);
   loginUser = (email, pswd) => this.auth.signInWithEmailAndPassword(email, pswd);
   signoutUser = () => this.auth.signOut();
