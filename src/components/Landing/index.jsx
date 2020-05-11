@@ -1,37 +1,13 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
+import Container from './Container';
 
-const Landing = () => {
-  const [btns, setBtns] = useState(false);
-  const refClaws = useRef(null);
-
-  useEffect(() => {
-    refClaws.current.classList.add("startingImg");
-
-    setTimeout(() => {
-      refClaws.current.classList.remove("startingImg");
-      setBtns(true);
-    }, 1000);
-  }, []);
-
-  const setClaws = e => {
-    if(e.target.classList.contains("leftBox") || e.target.textContent === "Inscription") {
-      refClaws.current.classList.add("leftImg");
-    }
-    else if(e.target.classList.contains("rightBox") || e.target.textContent === "Connexion") {
-      refClaws.current.classList.add("rightImg");
-    }
-  };
-
-  const removeClaws = e => {
-    if(refClaws.current.classList.contains("leftImg")) {
-      refClaws.current.classList.remove("leftImg")
-    }
-    else if(refClaws.current.classList.contains("rightImg")) {
-      refClaws.current.classList.remove("rightImg")
-    }
-  };
-
+export const Landing = ({
+  refClaws,
+  btns,
+  setClaws,
+  removeClaws
+}) => {
   return (
     <main ref={refClaws} className="welcomePage">
       {
@@ -50,4 +26,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default React.memo(Container);

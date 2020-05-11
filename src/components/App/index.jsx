@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 
+import config from '../../assets/config/marvelAPI'
+
 // Contexts
 import Firebase, {FirebaseContext} from '../Firebase';
 import {ToastContainer} from 'react-toastify';
@@ -19,6 +21,7 @@ import ForgottenPassword from '../ForgottenPassword';
 import {IconContext} from 'react-icons';
 
 const App = () => {
+  console.log({config});
   return (
     <FirebaseContext.Provider value={new Firebase()}>
       <Router>
@@ -42,4 +45,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default React.memo(App);

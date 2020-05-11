@@ -35,6 +35,6 @@ const Question = ({
       </button>
     </React.Fragment>
   );
-}
+};
 
 export default React.memo(Question);

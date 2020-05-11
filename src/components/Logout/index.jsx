@@ -16,6 +16,8 @@ const Logout = () => {
     }
   },[checked, firebase]);
 
+  console.log("Logout");
+
   return (
     <article className="logoutContainer">
       <label className="switch">
@@ -30,4 +32,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default React.memo(Logout);

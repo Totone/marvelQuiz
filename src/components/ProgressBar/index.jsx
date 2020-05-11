@@ -1,4 +1,5 @@
 import React from 'react';
+import getStyle from './style';
 
 const ProgressBar = ({
   currentQuestionNb,
@@ -7,6 +8,7 @@ const ProgressBar = ({
   const percentage = `${currentQuestionNb/maxQuestions*100}%`;
   const questionStr = `Question: ${currentQuestionNb}/${maxQuestions}`;
   const progressionStr = `Progression: ${percentage}`;
+  const style = getStyle(percentage);
   console.log("ProgressBar", percentage);
   return (
     <React.Fragment>
@@ -15,7 +17,7 @@ const ProgressBar = ({
         <article className="progressPercent">{progressionStr}</article>
       </section>
       <article className="progressBar">
-        <section  className="progressBarChange" style={{width: percentage}}/>
+        <section  className="progressBarChange" style={style}/>
       </article>
       
     </React.Fragment>
