@@ -5,18 +5,7 @@
  * Cookies names are formatted to be easily found in localStorage 
  * & application accesses logic to localStorage is managed here 
  * to keep other app files clean.
- * 
- * config is an object looking like:
- * 
-  const config = {
-    dataAgeLimit: 15,
-    labels: {
-      appPrefix: "MarvelQuiz",
-      date: "date",
-    },
-  } 
-*/ 
-
+ */ 
 import config from '../assets/config/storage';
 
 /**

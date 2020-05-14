@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { FirebaseContext } from '../Firebase';
+import { BackendContext } from '../../services/backend';
 
 import { FormPage as Component } from '.';
 import style from './style';
@@ -12,7 +12,7 @@ const FormPage = ({
   ...props
 }) => {
 
-  const api = useContext(FirebaseContext);
+  const backend = useContext(BackendContext);
   const [formState, setFormState] = useState({});
   const [loginErrorMsg, setError] = useState(null);
   const [forgottenPasswordSuccessMsg, setSuccess] = useState(null);
@@ -67,7 +67,7 @@ const FormPage = ({
   };
 
   const handleSubmitForget = () => {
-    api.resetPassword(formState.email)
+    backend.resetPassword(formState.email)
     .then(() => {
       setError(null);
       setSuccess(`Consultez votre email ${formState.email} pour remplacer votre mot de passe.`);
@@ -80,8 +80,7 @@ const FormPage = ({
 
   const handleSubmitLogin = () => {
     const {email, password} = formState;
-    console.log(props);
-    api.loginUser(email, password)
+    backend.loginUser(email, password)
     .then(() => {
       getInitialFormState();
       props.history.push("/welcome");
@@ -94,9 +93,9 @@ const FormPage = ({
 
   const handleSubmitSignup = () => {
     const {email, password, pseudo} = formState;
-    api.signupUser(email, password)
+    backend.signupUser(email, password)
     .then(authUser => {
-      return api.user(authUser.user.uid).set({
+      return backend.user(authUser.user.uid).set({
         pseudo, 
         email
       });

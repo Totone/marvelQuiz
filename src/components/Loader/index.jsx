@@ -6,7 +6,6 @@ const Loader = ({
   styling
 }) => {
   const fullStyle = {...style, ...styling};
-  console.log("Loading");
   return (
     <React.Fragment>
       <article className="loader"></article>

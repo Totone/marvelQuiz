@@ -10,7 +10,7 @@ const Modal = ({
   return data && (
     <article className="modalBackground">
       <section className="modalContainer">
-
+      
         <header className="modalHeader">
           <h2>{data.name}</h2>
         </header>

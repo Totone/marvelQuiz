@@ -6,7 +6,6 @@ const Levels = ({
   currentLevel
 }) => {
   const [steps, setSteps] = useState([]);
-  console.log("Levels", levelNames, currentLevel, steps);
   
   useEffect(
     () => {

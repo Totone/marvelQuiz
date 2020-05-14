@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {FirebaseContext} from '../Firebase';
+import {BackendContext} from '../../services/backend';
 import Tooltip from 'react-tooltip';
 
 const Logout = () => {
   const [checked, setChecked] = useState(false);
-  const firebase = useContext(FirebaseContext);
+  const backend = useContext(BackendContext);
 
   const handleChange = (e) => {
     setChecked(e.target.checked);
@@ -12,11 +12,9 @@ const Logout = () => {
 
   useEffect(() => {
     if(checked) {
-      firebase.signoutUser();
+      backend.signoutUser();
     }
-  },[checked, firebase]);
-
-  console.log("Logout");
+  },[checked, backend]);
 
   return (
     <article className="logoutContainer">

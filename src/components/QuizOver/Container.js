@@ -62,8 +62,6 @@ const QuizOver = React.forwardRef((props, ref) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("QuizOver", isLastLevel);
-
   return (
     <Component 
       isLastLevel={isLastLevel}

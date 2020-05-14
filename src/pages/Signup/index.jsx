@@ -1,5 +1,5 @@
 import React from 'react';
-import FormPage from '../FormPage';
+import FormPage from '../../components/FormPage';
 
 export default React.memo(
   (props) => (

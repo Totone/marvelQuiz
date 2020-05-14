@@ -1,28 +1,26 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { FirebaseContext } from '../Firebase';
+import { BackendContext } from '../../services/backend';
 import { Welcome as Component } from '.';
-import Loader from '../Loader';
+import Loader from '../../components/Loader';
 import style from './style';
 
 const Welcome = (props) => {
-  const firebase = useContext(FirebaseContext);
+  const backend = useContext(BackendContext);
   const [userSession, setUserSession] = useState(null);
   const [userData, setUserData] = useState('');
 
-  console.log("Welcome", userData, userSession, userSession === null);
-
   useEffect(
     () => {
-      let listener = firebase.auth.onAuthStateChanged(
+      let listener = backend.auth.onAuthStateChanged(
         (user) => user ? setUserSession(user) : props.history.push('/')
       );
       
       if(userSession && userSession.uid) {
-        firebase.user(userSession.uid)
+        backend.user(userSession.uid)
         .get()
         .then(doc => {
           if(doc && doc.exists) {
-            setUserData(doc.data());
+            setUserData((doc.data()));
           }
         })
         .catch(err => {
@@ -34,10 +32,10 @@ const Welcome = (props) => {
         listener();
       };
 
-    }, [firebase, props.history, userSession]
+    }, [backend, props.history, userSession]
   );
 
-  return userSession === null 
+  return userData === '' || userSession === null 
   ? <Loader loadingMsg="Chargement" styling={style.loader}/> 
   : <Component userData={userData}/>
 };

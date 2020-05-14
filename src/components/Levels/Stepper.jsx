@@ -16,17 +16,19 @@ const Stepper = ({
     size
   } = style.stepper;
   return (
-    <StepperHorizontal 
-      steps={stepsList}
-      activeStep={activeStep}
-      circleTop={circleTop}
-      activeTitleColor={activeTitleColor}
-      activeColor={activeColor}
-      completeTitleColor={completeTitleColor}
-      defaultTitleColor={defaultTitleColor}
-      completeColor={completeColor}
-      size={size}
-    />
+    <React.Fragment>
+      <StepperHorizontal 
+        steps={stepsList}
+        activeStep={activeStep}
+        circleTop={circleTop}
+        activeTitleColor={activeTitleColor}
+        activeColor={activeColor}
+        completeTitleColor={completeTitleColor}
+        defaultTitleColor={defaultTitleColor}
+        completeColor={completeColor}
+        size={size}
+      />
+    </React.Fragment>
   );
 };
 

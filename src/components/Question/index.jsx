@@ -10,7 +10,6 @@ const Question = ({
   submitAnswer
 }) => {
   const isSelected = (option) => option === userAnswer ? "selected" : null;
-  console.log("Question");
   return (
     <React.Fragment>
       <h2>{label}</h2>

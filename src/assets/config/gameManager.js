@@ -1,5 +1,4 @@
 export const initialState = {
-  hasBeenWelcomed: false,
   currentQuizLevel: 0,
   maxQuestions: 10,
   storedQuestions: [],

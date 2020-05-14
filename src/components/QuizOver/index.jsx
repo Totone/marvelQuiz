@@ -18,7 +18,6 @@ export const QuizOver = ({
   hideModal,
   characterData
 }) => {
-  console.log("QuizOver");
   return (
     <React.Fragment>
       <section className="stepsBtnContainer">

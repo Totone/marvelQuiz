@@ -1,68 +1,64 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Marvel Quiz
 
-## Available Scripts
+Marvel Quiz is a small ReactJS application for beginners. This is a clone of the eponym [DonkeyGeek project](https://github.com/DonkeyGeek/marvel-quiz) (thank you), done to get myself back on track after some adventures I endured during this historic period & to handle Google Firebase tool.
 
-In the project directory, you can run:
+## Project resources & dependencies
 
-### `yarn start`
+* [React JS](https://fr.reactjs.org/docs/getting-started.html) - The JavaScript framework used
+* [NPM](https://www.npmjs.com/) - The package manager
+* [create React App](https://github.com/facebook/create-react-app) - Create React apps with no build configuration
+* [Firebase](https://firebase.google.com/docs) - Authentication, databases and hosting
+* [Marvel API](https://developer.marvel.com/) - The world's greatest comics API
+* [Iconfinder](https://www.iconfinder.com/) - The search engine for icons
+* [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js
+* [React Icons](https://www.npmjs.com/package/react-icons) - Popular icons in one package
+* [React Router Dom](https://www.npmjs.com/package/react-router-dom) - DOM bindings for React Router
+* [React Stepper Horizontal](https://www.npmjs.com/package/stepper-horizontal) - Well-designed stepper component for react
+* [React Toastify](https://www.npmjs.com/package/stepper-horizontal) - Easy and customizable notifications
+* [React Tooltip](https://www.npmjs.com/package/react-tooltip) - Easy and customizable tooltips
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Differences with the original project
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The goal of this project is to be more **component-oriented** than the original. This one was made for beginners & could not have a perfect structure. So the main evolution is about refactoring the project to get more & smaller components. I also renamed some variables & methods to be more understandable.
 
-### `yarn test`
+### Structure
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+src/
+├── assets
+│   ├── config
+│   ├── contentData
+│   └── images
+├── components
+│   ├── App
+│   │   ├── App.css
+│   │   └── index.jsx
+│   └── ComponentFolder
+│       ├── Container.js
+│       ├── style.js
+│       ├── useCustomHook.js
+│       └── index.jsx
+├── pages
+│   └── PageComponent
+├── services
+│   ├── backend
+│   ├── marvelAPI.js
+│   ├── push
+│   └── storage.js
+├── index.js
+└── serviceWorker.js
+```
 
-### `yarn build`
+* **`assets/`** stores app assets like config files, images, styles... In my case, it stores `contentData/` which should rather be in the backend * I wanted to move it but as this project is just an exercise, I didn't do it.
+* **`components/`** stores components. Each folder in it stores all necessary needed files.
+* **`pages/`** is similar to `components/` but stores layouts instead of components.
+* **`services/`** stores services like APIs or features using another technology. The purpose is to compute a service to be accessible in `components/` & pages/ as an API to avoid logic for different components at the same place. For example, `services/` contains `push/` which contains all the logic to display push notifications & can be called in other files by typing `push.welcome()` or `push.success()`.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### About storage.js
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+`./src/services/storage.js` is an API made to interact with browser local storage. Instead of using calls to local storage like `localStorage.get()`, I thinks a proper way is to get the logic to interact with localStorage in its own file & only call it where we want, to get a code more maintenable & understandable.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## That's it
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Don't forget to watch DonkeyGeek project & thank you for watching mine =)  
+Maybe there are English bad formulations... I'm French & I didn't practice English for a while, sorry!

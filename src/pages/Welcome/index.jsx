@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Logout from '../Logout';
-import Quiz from '../Quiz';
+import Logout from '../../components/Logout';
+import Quiz from '../../components/Quiz';
 import Container from './Container';
 
 export const Welcome = ({

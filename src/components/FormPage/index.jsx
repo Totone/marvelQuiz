@@ -16,7 +16,6 @@ export const FormPage = ({
   isButtonDisabled,
   bottomLinks,
 }) => {
-  
   return (
     <main className="signupLoginBox">
       <section className="slContainer">
