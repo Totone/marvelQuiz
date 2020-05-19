@@ -3,9 +3,9 @@ import style from './style';
 
 const Loader = ({
   loadingMsg,
-  styling
+  styling,
 }) => {
-  const fullStyle = {...style, ...styling};
+  const fullStyle = style[styling];
   return (
     <React.Fragment>
       <article className="loader"></article>

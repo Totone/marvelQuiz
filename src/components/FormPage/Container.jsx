@@ -1,31 +1,42 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { BackendContext } from '../../services/backend';
-
+import React from 'react';
 import { FormPage as Component } from '.';
 import style from './style';
+import locales, {getBottomLinks} from './locales';
+
+import useFormPage from './useFormPage';
 
 const FormPage = ({
-  formTitle,
-  formType,
-  inputs,
-  bottomLinks,
+  type,
+  bottomLinksLabels,
   ...props
 }) => {
+  // const backend = useContext(BackendContext);
+  // const [formState, setFormState] = useState({});
+  // const [loginErrorMsg, setError] = useState(null);
+  // const [forgottenPasswordSuccessMsg, setSuccess] = useState(null);
+  // const [isButtonDisabled, setButtonDisabled] = useState(true);
+  // const [isLoading, setLoading] = useState(true);
 
-  const backend = useContext(BackendContext);
-  const [formState, setFormState] = useState({});
-  const [loginErrorMsg, setError] = useState(null);
-  const [forgottenPasswordSuccessMsg, setSuccess] = useState(null);
-  const [isButtonDisabled, setButtonDisabled] = useState(true);
-  const [isLoading, setLoading] = useState(true);
+  const {
+    inputs,
+    formType, 
+    formTitle
+  } = locales[type];
 
-  const getInitialFormState = () => {
-    const output = {};
-    for(const input of inputs) {
-      output[input] = "";
-    }
-    setFormState(output);
-  };
+  const {
+    backend,
+    setError,
+    formState,
+    isLoading,
+    setSuccess,
+    setFormState,
+    loginErrorMsg, 
+    isButtonDisabled,
+    getInitialFormState,
+    forgottenPasswordSuccessMsg,
+  } = useFormPage(formType, inputs);
+
+  const bottomLinks = getBottomLinks(...bottomLinksLabels);
 
   const setFormInputData = inputs => {
     const list = [];
@@ -121,51 +132,51 @@ const FormPage = ({
   const leftBoxClass = `formBoxLeft${formType}`; // Login|Signup|Forget
     
 
-  // when formState changes
-  useEffect(
-    () => {
-      const buttonConditions = () => {
-        switch(formType) {
-          case "Forget": return formState.email === "";
-          case "Login": return formState.email === "" || formState.password.length < 6;
-          case "Signup": 
-            return formState.pseudo === "" 
-            || formState.email === "" 
-            || formState.password === "" 
-            || formState.password !== formState.confirmPassword;
-          default: return true;
-        }
-      };
-      if(!isLoading) setButtonDisabled(buttonConditions());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [formState]
-  );
-    // on component mounting
-    useEffect(
-      () => {
-        getInitialFormState();
-        setLoading(false);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []
-    );
-
+  // // when formState changes
+  // useEffect(
+  //   () => {
+  //     const buttonConditions = () => {
+  //       switch(formType) {
+  //         case "Forget": return formState.email === "";
+  //         case "Login": return formState.email === "" || formState.password.length < 6;
+  //         case "Signup": 
+  //           return formState.pseudo === "" 
+  //           || formState.email === "" 
+  //           || formState.password === "" 
+  //           || formState.password !== formState.confirmPassword;
+  //         default: return true;
+  //       }
+  //     };
+  //     if(!isLoading) setButtonDisabled(buttonConditions());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, [formState]
+  // );
+  //   // on component mounting
+  //   useEffect(
+  //     () => {
+  //       getInitialFormState();
+  //       setLoading(false);
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //     }, []
+  //   );
 
   return (
-    !isLoading &&
-    <Component 
-      leftBoxClass={leftBoxClass}
-      handleFormSubmit={handleFormSubmit}
-      formTitle={formTitle} 
-      formType={formType}
-      forgottenPasswordSuccessMsg={forgottenPasswordSuccessMsg}
-      style={style}
-      loginErrorMsg={loginErrorMsg}
-      inputsList={inputsList}
-      formState={formState}
-      handleFormChange={handleFormChange}
-      isButtonDisabled={isButtonDisabled}
-      bottomLinks={bottomLinks}
-    />
+    !isLoading && (
+      <Component 
+        leftBoxClass={leftBoxClass}
+        handleFormSubmit={handleFormSubmit}
+        formTitle={formTitle} 
+        formType={formType}
+        forgottenPasswordSuccessMsg={forgottenPasswordSuccessMsg}
+        style={style}
+        loginErrorMsg={loginErrorMsg}
+        inputsList={inputsList}
+        formState={formState}
+        handleFormChange={handleFormChange}
+        isButtonDisabled={isButtonDisabled}
+        bottomLinks={bottomLinks}
+      />
+    )
   );
 }
 

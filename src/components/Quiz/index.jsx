@@ -6,7 +6,7 @@ import Question from '../Question';
 import QuizOver from '../QuizOver';
 
 import push from '../../services/push';
-import quizData from '../../assets/contentData';
+import quizData from '../../assets/quizData';
 
 import { initialState, levelNames } from '../../assets/config/gameManager';
 

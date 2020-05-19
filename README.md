@@ -1,6 +1,33 @@
 # Marvel Quiz
 
-Marvel Quiz is a small ReactJS application for beginners. This is a clone of the eponym [DonkeyGeek project](https://github.com/DonkeyGeek/marvel-quiz) (thank you), done to get myself back on track after some adventures I endured during this historic period & to handle Google Firebase tool.
+Marvel Quiz is a small ReactJS application for beginners. This is a clone of the eponym [DonkeyGeek project](https://github.com/DonkeyGeek/marvel-quiz) done to quietly get myself back on track after some adventures I endured during this historic period & to handle Google Firebase tool.
+
+## Getting started
+
+* Clone the project  
+  `git clone https`
+* Go to project root & install the dependencies  
+  `npm install`
+* Create an account in [MarvelAPI](https://developer.marvel.com/) & [Google Firebase](https://firebase.google.com/) platforms
+* Create a `.env` file to assign your environment variables with your MarvelAPI & Google Firebase data  
+
+  ```bash
+  # Marvel API data
+  REACT_APP_MARVEL_API_KEY=#Your Marvel API key#
+  REACT_APP_MARVEL_API_HASH=#Your Marvel API hash (check API doc)#
+
+  # Firebase data
+  REACT_APP_FIREBASE_API_KEY=#YOUR_DATA_HERE#
+  REACT_APP_FIREBASE_AUTH_DOMAIN=#YOUR_DATA_HERE#
+  REACT_APP_FIREBASE_DATABASE_URL=#YOUR_DATA_HERE#
+  REACT_APP_FIREBASE_PROJECT_ID=#YOUR_DATA_HERE#
+  REACT_APP_FIREBASE_STORAGE_BUCKET=#YOUR_DATA_HERE#
+  REACT_APP_FIREBASE_MESSAGING_SENDER_ID=#YOUR_DATA_HERE#
+  REACT_APP_FIREBASE_APP_ID=#YOUR_DATA_HERE#
+  ```
+
+* Run the app  
+  `npm start`
 
 ## Project resources & dependencies
 
@@ -19,31 +46,32 @@ Marvel Quiz is a small ReactJS application for beginners. This is a clone of the
 
 ## Differences with the original project
 
-The goal of this project is to be more **component-oriented** than the original. This one was made for beginners & could not have a perfect structure. So the main evolution is about refactoring the project to get more & smaller components. I also renamed some variables & methods to be more understandable.
+The goal of this project is to be more **component-oriented** than the original. So the main evolution is about refactoring the project to get more & smaller components. The aim is to get components as independent as possible from each other & to understand the code more easily.
 
 ### Structure
 
 ```bash
 src/
-├── assets
-│   ├── config
-│   ├── contentData
-│   └── images
-├── components
-│   ├── App
+├── assets/
+│   ├── config/
+│   ├── contentData/
+│   └── images/
+├── components/
+│   ├── App/
 │   │   ├── App.css
 │   │   └── index.jsx
-│   └── ComponentFolder
+│   └── ComponentFolder/
 │       ├── Container.js
 │       ├── style.js
+│       ├── locales.js
 │       ├── useCustomHook.js
 │       └── index.jsx
-├── pages
+├── pages/
 │   └── PageComponent
-├── services
-│   ├── backend
+├── services/
+│   ├── backend/
 │   ├── marvelAPI.js
-│   ├── push
+│   ├── push/
 │   └── storage.js
 ├── index.js
 └── serviceWorker.js
@@ -54,11 +82,25 @@ src/
 * **`pages/`** is similar to `components/` but stores layouts instead of components.
 * **`services/`** stores services like APIs or features using another technology. The purpose is to compute a service to be accessible in `components/` & pages/ as an API to avoid logic for different components at the same place. For example, `services/` contains `push/` which contains all the logic to display push notifications & can be called in other files by typing `push.welcome()` or `push.success()`.
 
+### About components/ & pages/
+
+Folders are built with files corresponding to components:
+
+* `index.jsx` stores component display
+* `Container.jsx` stores component logic
+* `useCustomHook` stores component hooks
+* `style.js` stores component html style
+* `locales.js` stores localization data, useful when you want to translate an application into several languages
+
+This split isn't systematic. In case of a small component, everything can be stored in `index.js`. Ifthe component gets bigger, it can be useful to create a new file corresponding to the data type.
+
 ### About storage.js
 
 `./src/services/storage.js` is an API made to interact with browser local storage. Instead of using calls to local storage like `localStorage.get()`, I thinks a proper way is to get the logic to interact with localStorage in its own file & only call it where we want, to get a code more maintenable & understandable.
 
 ## That's it
 
-Don't forget to watch DonkeyGeek project & thank you for watching mine =)  
-Maybe there are English bad formulations... I'm French & I didn't practice English for a while, sorry!
+Don't forget to watch [DonkeyGeek](https://www.github.com/DonkeyGeek) project & thank you for watching mine =)  
+If I publish this project, it is to get feedbacks about my code structure & practises. Is my approach good? Is there a way to optimize this app? Which React techniques do I not yet master & which ones I'd rather forget?
+
+Thank you! Take care of your loved ones & yourself.

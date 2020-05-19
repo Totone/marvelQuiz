@@ -8,10 +8,11 @@ import {
   setDataToLS
 } from '../../services/storage';
 
+import locales from './locales';
+
 const QuizOver = React.forwardRef((props, ref) => {
   const [asked, setAsked] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [message, setMessage] = useState("");
   const [characterData, setCharacterData] = useState([]);
   const [isDataLoading, setDataLoading] = useState(true);
 
@@ -24,10 +25,7 @@ const QuizOver = React.forwardRef((props, ref) => {
     isSucceeded
   } = props;
   
-  const success = `Réussite: ${score}%`;
-  const note = `Note: ${succeeds}/${maxQuestions}`;
-
-  const showModal = (id) => () => {
+  const showModal = (id) => async() => {
     setModalOpen(true);
 
     const updateData = (id) => {
@@ -35,15 +33,17 @@ const QuizOver = React.forwardRef((props, ref) => {
       setDataLoading(false);
     };
 
-    isDataInLS(id) 
-    ? updateData( getDataFromLS(id) ) 
-    : getMarvelApiData(
-      id,
-      (res) => {
-        setDataToLS(id, res.data);
-        updateData(res.data)
-      }
-    );
+    try {
+      const newData = isDataInLS(id) 
+      ? getDataFromLS(id) 
+      : await getMarvelApiData(id);
+      
+      !isDataInLS(id) && setDataToLS(id, newData);
+      updateData(newData);
+    }
+    catch(e) {
+      console.trace(e)
+    }
   };
 
   const hideModal = () => {
@@ -53,29 +53,31 @@ const QuizOver = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     setAsked(ref.current);
-    setMessage(
-      ! isSucceeded ? "Vous avez échoué..."
-      : isLastLevel ? "Bravo, vous avez réussi tous les niveaux!"
-      : "Bravo, vous avez réussi le niveau!"
-    );
     checkStoredDataAge();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const labels = () => ({
+    ...locales.table,
+    successPercentage: locales.getSuccessPercentage(score),
+    grade: locales.getGrade(succeeds, maxQuestions),
+    feedback: locales.getFeedback(isSucceeded, isLastLevel),
+    answersHeader: locales.answersHeader,
+    loader: locales.loader,
+    button: locales.getButton(isLastLevel)
+  });
+
   return (
     <Component 
-      isLastLevel={isLastLevel}
       isSucceeded={isSucceeded}
-      message={message}
       loadLevel={() => loadLevel(!isLastLevel)}
-      success={success}
-      note={note}
       askedQuestions={asked}
       showModal={showModal}
       isModalOpen={isModalOpen}
       isDataLoading={isDataLoading}
       hideModal={hideModal}
       characterData={characterData}
+      labels={labels()}
     />
   );
 });

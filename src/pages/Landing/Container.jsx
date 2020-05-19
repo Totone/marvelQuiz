@@ -4,6 +4,17 @@ import { Landing as Component } from './';
 const Landing = () => {
   const [btns, setBtns] = useState(false);
   const refClaws = useRef(null);
+  const links = [
+    {
+      href: "/signup",
+      className: "leftBox",
+      label: "Inscription"
+    },{
+      href: "/login",
+      className: "rightBox",
+      label: "Connexion"
+    }
+  ];
 
   const setClaws = e => {
     if(e.target.classList.contains("leftBox") || e.target.textContent === "Inscription") {
@@ -43,6 +54,7 @@ const Landing = () => {
       btns={btns}
       setClaws={setClaws}
       removeClaws={removeClaws} 
+      links={links}
     />
   );
 }

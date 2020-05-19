@@ -1,16 +1,19 @@
 import React from 'react';
 import style from './style';
-import batman from '../../images/batman.png';
+import batman from '../../assets/images/batman.png';
+import labels from './locales';
 
 const ErrorPage = () => {
   return (
     <main className="quiz-bg">
       <section className="container">
-        <h2 style={style.centerH2}>Oups, cette page n'existe pas!</h2>
+        <h2 style={style.centerH2}>
+          {labels.errorMessage}
+        </h2>
         <img 
           style={style.centerImg}
           src={batman}
-          alt="Error page"
+          alt={labels.errorAlt}
         />
       </section>
     </main>

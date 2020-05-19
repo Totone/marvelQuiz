@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Container from './Container';
+import FormInput from './FormInput';
+import BottomLink from './BottomLink';
 
 export const FormPage = ({
   leftBoxClass,
@@ -35,21 +36,16 @@ export const FormPage = ({
                       loginErrorMsg && <span>{loginErrorMsg.message}</span>
                     }
                     {
-                      inputsList.map((input, index) => (
-                        <section key={`inputsList-${index}`} className="inputBox">
-                          <input 
-                            type={input.type}
-                            id={input.id}
-                            value={formState[input.id]}
-                            onChange={handleFormChange}
-                            autoComplete="off"
-                            required
+                      inputsList.map(
+                        (input, index) => (
+                          <FormInput
+                            key={`inputsList-${index}`}
+                            handleFormChange={handleFormChange}
+                            formState={formState}
+                            input={input}
                           />
-                          <label htmlFor={input.id}>
-                            {input.label}
-                          </label>
-                        </section>
-                      ))
+                        )
+                      )
                     }
       
                     <button disabled={isButtonDisabled}>Envoyer</button>
@@ -58,18 +54,14 @@ export const FormPage = ({
               }
             </form>
 
-            <div  className="linkContainer">
+            <div className="linkContainer">
               {
                 bottomLinks.map(
                   (link, index) => (
-                    <p key={`bottomLinks-${index}`}>
-                      <Link
-                        className="simpleLink"
-                        to={link.href}
-                      >
-                        {link.label}
-                      </Link>
-                    </p>
+                    <BottomLink 
+                      key={`bottomLinks-${index}`}
+                      link={link}
+                    />
                   )
                 )
               }

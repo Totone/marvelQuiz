@@ -2,21 +2,14 @@ import React from 'react';
 import FormPage from '../../components/FormPage';
 
 export default React.memo(
-  (props) => (
-    <FormPage
-      {...props}
-      formType="Login"
-      formTitle="Connexion"
-      inputs={["email", "password"]}
-      bottomLinks={[
-        {
-          href: "/signup",
-          label: "Nouveau? Inscrivez-vous!"
-        },{
-          href: "/forgottenpassword",
-          label: "Mot de passe oublié?"
-        }
-      ]}
-    />
-  )
+  (props) => {    
+    const bottomLinksLabels = ["signup", "forget"];
+    return (
+      <FormPage
+        {...props}
+        type="login"
+        bottomLinksLabels={bottomLinksLabels}
+      />
+    );
+  }
 );

@@ -14,15 +14,17 @@ const Question = ({
     <React.Fragment>
       <h2>{label}</h2>
       {
-        options.map((option, index) => (
-        <p 
-          key={index}
-          onClick={() => handleOptions(option)}
-          className={`answerOptions ${isSelected(option)}`}
-        >
-          <FaChevronCircleRight/> {option}
-        </p>
-        ))
+        options.map(
+          (option, index) => (
+            <p 
+              key={index}
+              onClick={() => handleOptions(option)}
+              className={`answerOptions ${isSelected(option)}`}
+            >
+              <FaChevronCircleRight/> {option}
+            </p>
+          )
+        )
       }
 
       <button

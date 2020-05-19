@@ -6,19 +6,30 @@ export const Landing = ({
   refClaws,
   btns,
   setClaws,
-  removeClaws
+  removeClaws,
+  links
 }) => {
   return (
     <main ref={refClaws} className="welcomePage">
       {
         btns && (
           <React.Fragment>
-            <section onMouseOver={setClaws} onMouseOut={removeClaws} className="leftBox">
-              <Link to="/signup" className="btn-welcome">Inscription</Link>
-            </section>
-            <section onMouseOver={setClaws} onMouseOut={removeClaws} className="rightBox">
-              <Link to="login" className="btn-welcome">Connexion</Link>
-            </section>
+            {
+              links.map(
+                (link, index) => (
+                  <section
+                    key={`landingLink-${index}`} 
+                    onMouseOver={setClaws}
+                    onMouseOut={removeClaws}
+                    className={link.className}
+                  >
+                    <Link to={link.href} className="btn-welcome">
+                      {link.label}
+                    </Link>
+                  </section>
+                )
+              )
+            }
           </React.Fragment>
         )
       }

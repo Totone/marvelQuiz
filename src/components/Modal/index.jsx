@@ -1,55 +1,44 @@
 import React from 'react';
 import Loader from '../Loader';
+import DataLinks from './DataLinks';
+
+import getLocales from './locales';
 
 const Modal = ({
-  isDisplayed, 
+  isDisplayed,
   hide,
   data,
   attributionText
 }) => {
+  const labels = getLocales(data, attributionText);
+
   return data && (
     <article className="modalBackground">
       <section className="modalContainer">
       
         <header className="modalHeader">
-          <h2>{data.name}</h2>
+          <h2>{labels.header}</h2>
         </header>
 
         {
-          !isDisplayed 
-          ? <Loader /> 
+          !isDisplayed ? <Loader /> 
           : (
             <main className="modalBody">
               <section className="comicImage">
                 <img 
-                  src={data.thumbnail.path + "." + data.thumbnail.extension}
-                  alt={data.name}
-                  title={data.name}
+                  src={labels.img.src}
+                  alt={labels.img.alt}
+                  title={labels.img.title}
                 />
-                { attributionText }
+                {labels.img.attributionText}
               </section>
   
               <section className="comicDetails">
-                <h3>Description</h3>
-                <p>
-                  { data.description ? data.description : "Description indisponible..." }
-                </p>
-                <h3>Plus d'infos</h3>
-                {
-                  data.urls &&
-                  data.urls.map(
-                    (url, index) => (
-                      <a
-                        key={index}
-                        href={url.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        { url.type[0].toUpperCase() + url.type.slice(1) }
-                      </a>
-                    )
-                  )
-                }
+                <h3>{labels.description.header}</h3>
+                <p>{labels.description.content}</p>
+                <h3>{labels.description.moreData}</h3>
+
+                { data.urls && <DataLinks list={data.urls} />}
               </section>
             </main>
           )
@@ -57,7 +46,7 @@ const Modal = ({
 
         <footer className="modalFooter">
           <button className="modalBtn" onClick={hide}>
-            Fermer
+            {labels.closeButton}
           </button>
         </footer>
 
