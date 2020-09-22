@@ -101,6 +101,6 @@ This split isn't systematic. In case of a small component, everything can be sto
 ## That's it
 
 Don't forget to watch [DonkeyGeek](https://www.github.com/DonkeyGeek) project & thank you for watching mine =)  
-If I publish this project, it is to get feedbacks about my code structure & practises. Is my approach good? Is there a way to optimize this app? Which React techniques do I not yet master & which ones I'd rather forget?
+If I publish this project, it is to get feedbacks about my code structure & practises. Is my approach good? Is there a way to optimize this app? Which React techniques do I not yet master & which ones I'd rather forget? Feel free to feedback!
 
 Thank you! Take care of your loved ones & yourself.
